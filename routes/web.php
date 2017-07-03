@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 Route::get('/api/request-header-parser',
     'Api\RequestHeaderParser\RequestHeaderParserController@index');
+Route::get('/short/new', 'Api\ShortUrl\ShortUrlController@create');
+Route::get('/short/{short_url}', 'Api\ShortUrl\ShortUrlController@index');
