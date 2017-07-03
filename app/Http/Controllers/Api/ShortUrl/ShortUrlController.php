@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\ShortUrl;
 
-use Illuminate\Http\Request;
 use App\Api\ShortUrlCreator;
+use App\ShortUrl;
 
 class ShortUrlController
 {
@@ -16,6 +16,11 @@ class ShortUrlController
 
     public function index($short_url)
     {
+        if($long_url = ShortUrl::find($short_url)) {
+            return redirect()->away($long_url['long_url']);
+        } else {
+            return response()->json(["error" => "invalid url"]);
+        }
     }
 
     public function create()
