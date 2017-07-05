@@ -3,14 +3,13 @@
 namespace App\Api;
 
 use Google_Client;
+use Google_Service_Customsearch;
 
 class GoogleImageSearcher
 {
     private $appName;
     private $google_cse_api_key;
     private $optParams;
-    private $google_project_id;
-    private $google_project_api_key;
     private $service;
 
     public function __construct($appName = "My Search")
@@ -35,8 +34,8 @@ class GoogleImageSearcher
         foreach($results as $result) {
             $resultArray['url'] = $result['link'];
             $resultArray['snippet'] = $result['htmlSnippet'];
-            $resultArray['thumbnail'] = $result['thumbnailLink'];
-            $resultArray['context'] = $result['contextLink'];
+            $resultArray['thumbnail'] = $result['image']['thumbnailLink'];
+            $resultArray['context'] = $result['image']['contextLink'];
             $resultsArray[] = $resultArray;
         }
         return $resultsArray;
@@ -50,8 +49,6 @@ class GoogleImageSearcher
             "searchType" => "image",
             "num" => 10
         ];
-        $this->google_project_id = env('GOOGLE_PROJECT_ID');
-        $this->google_project_api_key = env('GOOGLE_PROJECT_API_KEY');
         $this->appName = $appName;
         $this->service = $this->createService();
     }
@@ -61,6 +58,6 @@ class GoogleImageSearcher
         $client = new Google_Client();
         $client->setApplicationName($this->appName);
         $client->setDeveloperKey($this->google_cse_api_key);
-        return new \Google_Service_Customsearch($client);
+        return new Google_Service_Customsearch($client);
     }
 }
