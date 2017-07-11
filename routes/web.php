@@ -12,11 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('polls.home');
 });
+Route::get('/api/docs', 'Api\Docs\MainController@index');
 Route::get('/api/request-header-parser',
     'Api\RequestHeaderParser\RequestHeaderParserController@index');
 Route::get('/short/new', 'Api\ShortUrl\ShortUrlController@create');
 Route::get('/short/{short_url}', 'Api\ShortUrl\ShortUrlController@index');
 Route::get('/api/image/search', 'Api\ImageSearch\ImageSearchController@index');
 Route::get('/api/image/recent', 'Api\ImageSearch\ImageSearchController@recentSearches');
+Route::get('/polls/home', 'Polls\PollsController@index');
