@@ -22,3 +22,4 @@ Route::get('/short/{short_url}', 'Api\ShortUrl\ShortUrlController@index');
 Route::get('/api/image/search', 'Api\ImageSearch\ImageSearchController@index');
 Route::get('/api/image/recent', 'Api\ImageSearch\ImageSearchController@recentSearches');
 Route::get('/polls/home', 'Polls\PollsController@index');
+Route::get('polls/show/{poll_id}', 'Polls\PollsController@show');

@@ -8,9 +8,20 @@
                 <h1 class="text-center margin-top-100 editContent">
                     Polls by Bascoy
                 </h1>
-                <div class="text-center">
-                    <img src="https://learninglaravel.net/img/LearningLaravel5_cover0.png" width="302" height="391" alt="">
-                </div>
+                <h3 class="text-center margin-top-100 editContent">
+                    Select a poll to see the results and vote, or <a href="/polls/create">
+                        make a new poll!
+                    </a>
+                </h3>
+                @foreach ($polls as $poll)
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <a href="/polls/show/{{ $poll->poll_id }}">
+                                {{ $poll->name }}
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
