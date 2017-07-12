@@ -31,5 +31,6 @@
         $.material.init();
     });
 </script>
+@yield('other_scripts');
 </body>
 </html>

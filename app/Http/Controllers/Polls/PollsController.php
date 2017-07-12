@@ -18,4 +18,12 @@ class PollsController extends Controller
         $poll = Polls::wherePoll_id($poll_id);
         return view('polls.vote', compact('poll'));
     }
+    public function create()
+    {
+        return view('polls.create');
+    }
+    public function store()
+    {
+
+    }
 }
