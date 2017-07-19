@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{!! asset('css/bootstrap-material-design.min.css') !!}">
     <link rel="stylesheet" href="{!! asset('css/ripples.min.css') !!}">
 
+    <!--App CSS-->
+    <link rel="stylesheet" href="{!! asset('css/app.css') !!}">
 </head>
 <body>
 

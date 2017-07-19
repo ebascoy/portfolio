@@ -79,11 +79,16 @@ module.exports = __webpack_require__(42);
 /**
  * Created by Ely Bascoy on 7/12/17.
  */
-
 $(document).ready(function () {
     var counter = 0;
 
-    $("#choice-button").click(function () {
+    /**
+     * Dynamically adds choice fields, assigning a value if provided.
+     * @param event
+     * @param choiceValue
+     */
+    var addChoiceField = function addChoiceField() {
+        var choiceValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
         counter++;
 
@@ -92,9 +97,26 @@ $(document).ready(function () {
         }
         var newTextBoxDiv = $(document.createElement('div')).attr("id", 'choice-div-' + counter).attr("class", 'form-group');
 
-        newTextBoxDiv.after().html('<label ' + 'class="col-lg-2 control-label" ' + 'for="choice-' + counter + '">' + 'Choice ' + counter + '</label>' + '<div class="col-lg-10">' + '<input type="text" ' + 'name="choices[]" id="choice-' + counter + '" ' + 'class="form-control" ' + 'value="" placeholder="Enter new choice"></div>');
-
+        var formGroupHtml = '<label ' + 'class="col-lg-2 control-label" ' + 'for="choice-' + counter + '">' + 'Choice ' + counter + '</label>' + '<div class="col-lg-10">' + '<input type="text" ' + 'name="choices[]" id="choice-' + counter + '" ' + 'class="form-control" ' + 'placeholder="Enter new choice"';
+        if (choiceValue !== null) {
+            formGroupHtml += ' value="' + choiceValue + '"></div>';
+        } else {
+            formGroupHtml += '></div>';
+        }
+        newTextBoxDiv.after().html(formGroupHtml);
         newTextBoxDiv.appendTo("#choices-form-group");
+    };
+
+    // if we have old choice values, create and populate the fields
+    if (typeof choices !== "undefined" && $.isArray(choices)) {
+        for (var i = 0; i < choices.length; i++) {
+            addChoiceField(choices[i]);
+        }
+    }
+
+    // Add new choice fields dynamically
+    $("#choice-button").click(function () {
+        addChoiceField();
     });
 });
 

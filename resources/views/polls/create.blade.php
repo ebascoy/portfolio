@@ -31,7 +31,7 @@
                                 <label for="name" class="col-lg-2 control-label">Name</label>
                                 <div class="col-lg-10">
                                     <input type="text" class="form-control" id="name" placeholder="Poll Name"
-                                           name="name">
+                                           name="name" value="{!! old('name') !!}">
                                 </div>
                             </div>
                         </div>
@@ -62,5 +62,13 @@
     </div>
 @endsection
 @section('other_scripts')
+    @if (old('choices'))
+        <script>
+            var choices = [];
+            @foreach (old('choices') as $choice)
+                choices.push("{{ $choice }}");
+            @endforeach
+        </script>
+    @endif
     <script src="{!! asset('js/polls.js') !!}"></script>
 @endsection

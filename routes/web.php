@@ -26,3 +26,4 @@ Route::get('polls/show/{poll_id}', 'Polls\PollsController@show');
 Route::get('polls/my-polls', 'Polls\PollsController@index');
 Route::get('polls/create', 'Polls\PollsController@create');
 Route::post('polls/create', 'Polls\PollsController@store');
+Route::post('polls/show/{poll_id}', 'Polls\VotesController@store');

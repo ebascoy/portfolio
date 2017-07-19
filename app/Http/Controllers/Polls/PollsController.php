@@ -19,7 +19,8 @@ class PollsController extends Controller
     public function show($poll_id)
     {
         $poll = Poll::find($poll_id);
-        return view('polls.vote', compact('poll'));
+        $choices = Choice::where('poll_id', '=', $poll_id)->get();
+        return view('polls.vote', compact('poll', 'choices'));
     }
 
     public function create()

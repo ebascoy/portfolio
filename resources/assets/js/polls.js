@@ -1,22 +1,25 @@
 /**
  * Created by Ely Bascoy on 7/12/17.
  */
-
 $(document).ready(function () {
-    var counter = 0;
+    let counter = 0;
 
-    $("#choice-button").click(function () {
-
+    /**
+     * Dynamically adds choice fields, assigning a value if provided.
+     * @param event
+     * @param choiceValue
+     */
+    let addChoiceField = function addChoiceField(choiceValue = null) {
         counter++;
 
         if (counter === 1) {
             $('#choices-form-group').removeAttr("style");
         }
-        var newTextBoxDiv = $(document.createElement('div'))
+        let newTextBoxDiv = $(document.createElement('div'))
             .attr("id", 'choice-div-' + counter)
             .attr("class", 'form-group');
 
-        newTextBoxDiv.after().html('<label ' +
+        let formGroupHtml = '<label ' +
             'class="col-lg-2 control-label" ' +
             'for="choice-' + counter + '">' +
             'Choice ' + counter + '</label>' +
@@ -25,8 +28,25 @@ $(document).ready(function () {
             'name="choices[]" id="choice-'
             + counter + '" ' +
             'class="form-control" ' +
-            'value="" placeholder="Enter new choice"></div>');
-
+            'placeholder="Enter new choice"';
+        if (choiceValue !== null) {
+            formGroupHtml += ' value="' + choiceValue + '"></div>';
+        } else {
+            formGroupHtml += '></div>';
+        }
+        newTextBoxDiv.after().html(formGroupHtml);
         newTextBoxDiv.appendTo("#choices-form-group");
+    };
+
+    // if we have old choice values, create and populate the fields
+    if (typeof choices !== "undefined" && $.isArray(choices)) {
+        for (let i = 0; i < choices.length; i++) {
+            addChoiceField(choices[i]);
+        }
+    }
+
+    // Add new choice fields dynamically
+    $("#choice-button").click(function() {
+        addChoiceField();
     });
 });
