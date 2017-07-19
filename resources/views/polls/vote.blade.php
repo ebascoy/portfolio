@@ -9,7 +9,7 @@
                     {{ $poll->name }}
                 </h1>
                 <h3 class="text-center margin-top-100 editContent">
-                        Vote on this poll!
+                    Vote on this poll!
                     </a>
                 </h3>
             </div>

@@ -15,15 +15,18 @@ class PollsController extends Controller
         $polls = Poll::all();
         return view('polls.home', compact('polls'));
     }
+
     public function show($poll_id)
     {
         $poll = Poll::find($poll_id);
         return view('polls.vote', compact('poll'));
     }
+
     public function create()
     {
         return view('polls.create');
     }
+
     public function store(CreatePollForm $request)
     {
         $poll = new Poll;

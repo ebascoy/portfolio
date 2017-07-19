@@ -2,7 +2,7 @@
  * Created by Ely Bascoy on 7/12/17.
  */
 
-$(document).ready(function(){
+$(document).ready(function () {
     var counter = 0;
 
     $("#choice-button").click(function () {

@@ -22,12 +22,14 @@ class CreatePollForm extends FormRequest
      *
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function getValidatorInstance() {
+    protected function getValidatorInstance()
+    {
         $this->sanitize();
         return parent::getValidatorInstance();
     }
 
-    protected function sanitize() {
+    protected function sanitize()
+    {
         $input = $this->all();
 
         // get rid of any empty elements from 'choices' array

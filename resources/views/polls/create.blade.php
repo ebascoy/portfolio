@@ -30,7 +30,8 @@
                             <div class="form-group">
                                 <label for="name" class="col-lg-2 control-label">Name</label>
                                 <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="name" placeholder="Poll Name" name="name">
+                                    <input type="text" class="form-control" id="name" placeholder="Poll Name"
+                                           name="name">
                                 </div>
                             </div>
                         </div>
