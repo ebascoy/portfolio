@@ -30,7 +30,7 @@
                             <li><a href="/polls/home">Home</a></li>
                             <li><a href="/polls/login">Login</a></li>
                             <li><a href="/polls/my-polls">My Polls</a></li>
-                            <li><a href="/polls/new">New Poll</a></li>
+                            <li><a href="/polls/create">New Poll</a></li>
                             <li><a href="/polls/logout">Logout</a></li>
                         {{--@endif--}}
                     </ul>

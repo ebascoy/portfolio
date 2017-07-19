@@ -23,4 +23,6 @@ Route::get('/api/image/search', 'Api\ImageSearch\ImageSearchController@index');
 Route::get('/api/image/recent', 'Api\ImageSearch\ImageSearchController@recentSearches');
 Route::get('/polls/home', 'Polls\PollsController@index');
 Route::get('polls/show/{poll_id}', 'Polls\PollsController@show');
+Route::get('polls/my-polls', 'Polls\PollsController@index');
 Route::get('polls/create', 'Polls\PollsController@create');
+Route::post('polls/create', 'Polls\PollsController@store');

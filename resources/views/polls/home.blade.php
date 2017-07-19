@@ -16,7 +16,7 @@
                 @foreach ($polls as $poll)
                     <div class="panel panel-default">
                         <div class="panel-body text-center">
-                            <a href="/polls/show/{{ $poll->poll_id }}">
+                            <a href="/polls/show/{{ $poll->id }}">
                                 {{ $poll->name }}
                             </a>
                         </div>
