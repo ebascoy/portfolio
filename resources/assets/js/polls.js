@@ -1,6 +1,7 @@
 /**
  * Created by Ely Bascoy on 7/12/17.
  */
+
 $(document).ready(function () {
     let counter = 0;
 

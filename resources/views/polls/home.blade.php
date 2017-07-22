@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Polls Home')
+@section('title', $title)
 
 @section('content')
     <div class="container">

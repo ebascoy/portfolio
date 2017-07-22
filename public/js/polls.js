@@ -60,25 +60,26 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 41);
+/******/ 	return __webpack_require__(__webpack_require__.s = 158);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 41:
+/***/ 158:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(42);
+module.exports = __webpack_require__(159);
 
 
 /***/ }),
 
-/***/ 42:
+/***/ 159:
 /***/ (function(module, exports) {
 
 /**
  * Created by Ely Bascoy on 7/12/17.
  */
+
 $(document).ready(function () {
     var counter = 0;
 

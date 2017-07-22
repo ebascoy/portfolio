@@ -15,25 +15,43 @@
         <!-- navbar right -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="/api/docs">API Docs</a></li>
+                <li><a href="/api/docs">API Docs</a></li>
+                @if (Auth::guest())
+                    <li>
+                        <div>
+                            <a href="{{ url('/auth/twitter') }}" class="btn btn-raised">
+                                <img src="/images/sign-in-with-twitter-link.png" alt="Sign up with Twitter">
+                            </a>
+                        </div>
+                    </li>
+                @else
+                    <li>
+                        <div class="twitter-avatar-div">
+                            <img src="{{ Auth::user()->avatar }}" height="40" width="40" class="img-circle">
+                        </div>
+                    </li>
+                    <li><a href="/logout"
+                           onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}"
+                              method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                @endif
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-expanded="false">Polls
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        {{--@if (Auth::check())--}}
-                        {{--@role('manager')--}}
-                        {{--<li><a href="/admin">Admin</a></li>--}}
-                        {{--@endrole--}}
-                        {{--<li><a href="/users/logout">Logout</a></li>--}}
-                        {{--@else--}}
                         <li><a href="/polls/home">Home</a></li>
-                        <li><a href="/polls/login">Login</a></li>
-                        <li><a href="/polls/my-polls">My Polls</a></li>
-                        <li><a href="/polls/create">New Poll</a></li>
-                        <li><a href="/polls/logout">Logout</a></li>
-                        {{--@endif--}}
+                        @if (Auth::check())
+                            <li><a href="/polls/my-polls">My Polls</a></li>
+                            <li><a href="/polls/create">New Poll</a></li>
+                        @endif
                     </ul>
                 </li>
             </ul>

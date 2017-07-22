@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/home', function() {
+    return view('welcome');
+});
 Route::get('/api/docs', 'Api\Docs\MainController@index');
 Route::get('/api/request-header-parser',
     'Api\RequestHeaderParser\RequestHeaderParserController@index');
@@ -27,3 +30,8 @@ Route::get('polls/my-polls', 'Polls\PollsController@index');
 Route::get('polls/create', 'Polls\PollsController@create');
 Route::post('polls/create', 'Polls\PollsController@store');
 Route::post('polls/show/{poll_id}', 'Polls\VotesController@store');
+Auth::routes();
+
+// OAuth Routes
+Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
