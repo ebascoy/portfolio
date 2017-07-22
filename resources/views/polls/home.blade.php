@@ -13,6 +13,11 @@
                         make a new poll!
                     </a>
                 </h3>
+                @if (session('status'))
+                    <div class="alert alert-danger">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @foreach ($polls as $poll)
                     <div class="panel panel-default">
                         <div class="panel-body text-center">

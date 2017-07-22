@@ -13,13 +13,10 @@ class PollsController extends Controller
 {
     public function index()
     {
-        if (request()->path() == 'polls/home') {
-            $polls = Poll::all();
-            $title = 'Polls Home';
-        } else {
-            $polls = Poll::where('user_id', '=', Auth::user()->id)->get();
-            $title = 'My Polls';
-        }
+        $index_polls = $this->getIndexPolls();
+        $polls = $index_polls['polls'];
+        $title = $index_polls['title'];
+
         return view('polls.home', compact('polls', 'title'));
     }
 
@@ -37,6 +34,12 @@ class PollsController extends Controller
 
     public function create()
     {
+        if (! Auth::check()) {
+            $polls = Poll::all();
+            $title = 'Polls Home';
+            session()->flash('status', 'You must sign in to view that page.');
+            return view('polls.home', compact('polls', 'title'));
+        }
         return view('polls.create');
     }
 
@@ -57,5 +60,33 @@ class PollsController extends Controller
         }
 
         return redirect("polls/show/$poll_id");
+    }
+
+    protected function getIndexPolls() {
+        // Two pages, home and my-polls use this function
+        // If user is authenticated and going to my-polls,
+        // get user's polls and set title to My Polls
+        if (Auth::user() && request()->path() == 'polls/my-polls') {
+            $polls = Poll::where('user_id', '=', Auth::user()->id)->get();
+            $title = 'My Polls';
+        } else {
+            // If the user got here, he's either not authenticated
+            // or is going to Home (or both). Either way, they're going
+            // to be redirected to the Home view which lists all polls,
+            // so get all the polls and set the title to Home
+            $polls = Poll::all();
+            $title = 'Polls Home';
+            // If the user was trying to get to my-polls and got to this
+            // point, then the user is not authenticated, in which case
+            // we send the user to Home with an error message.
+            if (request()->path() == 'polls/my-polls') {
+                session()->flash('status', 'You must sign in to view that page.');
+            }
+        }
+
+        return [
+            'polls' => $polls,
+            'title' => $title
+        ];
     }
 }

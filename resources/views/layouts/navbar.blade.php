@@ -27,7 +27,8 @@
                     </li>
                     <li>
                         <div>
-                            <a href="{{ url('/auth/facebook') }}?last-url={!! htmlentities(request()->path()) !!}"
+                            {{--<a href="{{ url('/auth/facebook') }}?last-url={!! htmlentities(request()->path()) !!}"--}}
+                            <a href="{{ url('/auth/facebook') }}"
                                class="btn" style="padding: 0;">
                                 <img src="/images/sign-in-with-facebook.png"
                                      height="36px" width="222px"

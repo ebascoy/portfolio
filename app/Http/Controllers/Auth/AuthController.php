@@ -24,7 +24,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        request()->session()->put('last_url', request()->query('last-url'));
+        request()->session()->put('last_url', request()->server('HTTP_REFERER'));
         if ($provider == 'twitter' || $provider == 'facebook') {
             return Socialite::driver($provider)->redirect();
         } else {
