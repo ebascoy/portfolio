@@ -24,7 +24,12 @@ class AuthController extends Controller
      */
     public function redirectToProvider($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        request()->session()->put('last_url', request()->query('last-url'));
+        if ($provider == 'twitter' || $provider == 'facebook') {
+            return Socialite::driver($provider)->redirect();
+        } else {
+            return Socialite::driver($provider)->redirect();
+        }
     }
 
     /**
@@ -46,7 +51,7 @@ class AuthController extends Controller
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
 
-        return redirect($this->redirectPath);
+        return redirect(session('last_url'));
     }
 
     /**
@@ -64,13 +69,23 @@ class AuthController extends Controller
             return $authUser;
         }
 
-        return User::create([
-            'name'        => $user->name,
-            'handle'      => $user->nickname,
-            'provider'    => $provider,
-            'provider_id' => $user->id,
-            'avatar'      => $user->avatar_original,
-        ]);
+        if ($provider == 'twitter') {
+            return User::create([
+                'name'        => $user->name,
+                'handle'      => $user->nickname,
+                'provider'    => $provider,
+                'provider_id' => $user->id,
+                'avatar'      => $user->avatar_original,
+            ]);
+        } else {
+            return User::create([
+                'name'        => $user->getName(),
+                'handle'      => $user->getEmail(),
+                'provider'    => $provider,
+                'provider_id' => $user->getId(),
+                'avatar'      => $user->getAvatar(),
+            ]);
+        }
     }
 
 }

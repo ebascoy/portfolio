@@ -19,8 +19,19 @@
                 @if (Auth::guest())
                     <li>
                         <div>
-                            <a href="{{ url('/auth/twitter') }}" class="btn btn-raised">
-                                <img src="/images/sign-in-with-twitter-link.png" alt="Sign up with Twitter">
+                            <a href="{{ url('/auth/twitter') }}?last-url={!! htmlentities(request()->path()) !!}"
+                               class="btn btn-raised">
+                                <img src="/images/sign-in-with-twitter-link.png" alt="Sign in with Twitter">
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <a href="{{ url('/auth/facebook') }}?last-url={!! htmlentities(request()->path()) !!}"
+                               class="btn" style="padding: 0;">
+                                <img src="/images/sign-in-with-facebook.png"
+                                     height="36px" width="222px"
+                                     alt="Sign in with Facebook">
                             </a>
                         </div>
                     </li>
