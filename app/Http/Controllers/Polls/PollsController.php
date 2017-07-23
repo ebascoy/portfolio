@@ -63,6 +63,13 @@ class PollsController extends Controller
         return redirect("polls/show/$poll_id");
     }
 
+    public function delete($poll_id) {
+        $poll = Poll::find($poll_id);
+        $poll->delete();
+
+        return redirect('polls/my-polls');
+    }
+
     protected function getIndexPolls() {
         // Two pages, home and my-polls use this function
         // If user is authenticated and going to my-polls,

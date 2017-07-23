@@ -20,10 +20,15 @@
                 @endif
                 @foreach ($polls as $poll)
                     <div class="panel panel-default">
-                        <div class="panel-body text-center">
-                            <a href="/polls/show/{{ $poll->id }}">
+                        <div class="panel-body text-center anchor-center-parent">
+                            <a href="/polls/show/{{ $poll->id }}" class="anchor-center">
                                 {{ $poll->name }}
                             </a>
+                            @if (auth::check() && request()->path() == 'polls/my-polls')
+                                <a href="/polls/delete/{{ $poll->id }}" class="btn btn-primary btn-fab btn-fab-mini" style="float: right;">
+                                    <i class="material-icons">delete</i>
+                                </a>
+                            @endif
                         </div>
                     </div>
                 @endforeach

@@ -30,6 +30,7 @@ Route::get('polls/my-polls', 'Polls\PollsController@index');
 Route::get('polls/create', 'Polls\PollsController@create');
 Route::post('polls/create', 'Polls\PollsController@store');
 Route::post('polls/show/{poll_id}', 'Polls\VotesController@store');
+Route::get('polls/delete/{poll_id}', 'Polls\PollsController@delete');
 Auth::routes();
 
 // OAuth Routes
