@@ -27,6 +27,7 @@ class PollsController extends Controller
         $chart_data = DB::table('votes')
             ->join('choices', 'choices.id', '=', 'votes.choice_id')
             ->select('choices.name', DB::raw('count(*) as total'))
+            ->where('votes.poll_id', '=', $poll_id)
             ->groupBy('choices.name')
             ->get();
         return view('polls.vote', compact('poll', 'choices', 'chart_data'));

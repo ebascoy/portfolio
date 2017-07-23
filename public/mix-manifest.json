@@ -2,5 +2,7 @@
     "/js/poll-result-chart.js": "/js/poll-result-chart.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/polls.js": "/js/polls.js"
+    "/js/twitter.js": "/js/twitter.js",
+    "/js/polls.js": "/js/polls.js",
+    "/js/facebook.js": "/js/facebook.js"
 }

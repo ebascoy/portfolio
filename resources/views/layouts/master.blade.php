@@ -2,6 +2,7 @@
 <html>
 <head>
 
+    @yield('meta-tags')
     <title> @yield('title') </title>
     <!-- Material design fonts -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
@@ -18,10 +19,12 @@
     <link rel="stylesheet" href="{!! asset('css/app.css') !!}">
 </head>
 <body>
-
+<div id="fb-root"></div>
+<script src="{!! asset('js/facebook.js') !!}"></script>
 @include('layouts.navbar');
 @yield('content');
 
+<script src="{!! asset('js/twitter.js') !!}"></script>
 <script src="{!! asset('js/jquery-3.2.1.min.js') !!}"></script>
 <script src="{!! asset('js/bootstrap.min.js') !!}"></script>
 
