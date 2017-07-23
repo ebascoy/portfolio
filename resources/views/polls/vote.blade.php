@@ -37,20 +37,20 @@
                            src=sdkpreparse">Share</a>
                     </div>
                 </div>
-                <form class="form-horizontal" method="post">
-                    {{ csrf_field() }}
-                    @foreach($errors->all() as $error)
-                        <p class="alert alert-danger">{{ $error }}</p>
-                    @endforeach
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <input type="hidden" name="poll_id" value="{{ $poll->id }}">
-                    <fieldset>
-                        <div class="well">
-                            <div class="col-md-4">
+                @foreach($errors->all() as $error)
+                    <p class="alert alert-danger">{{ $error }}</p>
+                @endforeach
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                <div class="well">
+                    <form class="form-horizontal col-md-6" method="post" id="vote-form">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="poll_id" value="{{ $poll->id }}">
+                        <fieldset>
+                            <div class="form-group">
                                 @foreach ($choices as $choice)
                                     <div class="radio">
                                         <label class="dark-text">
@@ -65,21 +65,20 @@
                                         </label>
                                     </div>
                                 @endforeach
-                                @if(auth::check())
-                                    <div class="form-group col-md-10">
-                                        <label for="new-choice"
-                                               class="control-label dark-text">... or enter a new choice</label>
-                                        <input type="text" class="form-control" id="new-choice"
-                                               name="new-choice" value="{!! old('new-choice') !!}">
-                                    </div>
-                                @endif
                             </div>
-                            <canvas class="col-md-offset-4"
-                                    id="poll-result-chart"
-                                    width="400px"
-                                    height="400px">
-                            </canvas>
-                            <div class="form-group">
+                            @if(auth::check())
+                                <div class="form-group col-md-10">
+                                    <label for="new-choice"
+                                           class="control-label dark-text">... or enter a new choice</label>
+                                    <input type="text" class="form-control" id="new-choice"
+                                           name="new-choice"
+                                           @if (old('new-choice'))
+                                               value="{!! old('new-choice') !!}"
+                                           @endif
+                                    >
+                                </div>
+                            @endif
+                            {{--<div class="form-group">--}}
                                 <div class="col-lg-10">
                                     <button class="btn btn-raised btn-default">
                                         Cancel
@@ -88,10 +87,13 @@
                                         Submit
                                     </button>
                                 </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                            {{--</div>--}}
+                        </fieldset>
+                    </form>
+                    <canvas class="col-md-offset-6"
+                            id="poll-result-chart">
+                    </canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -99,6 +101,15 @@
 @section('other_scripts')
     @if($chart_data)
         <script>
+            let form_height = $('#vote-form').height();
+            let available_canvas_width = $('.well').width() / 2;
+            let poll_result_chart = $('#poll-result-chart');
+            poll_result_chart.height(form_height);
+            if (form_height > available_canvas_width) {
+                poll_result_chart.width(available_canvas_width);
+            } else {
+                poll_result_chart.width(form_height);
+            }
             let chartLabels = [];
             let chartValues = [];
             let backgroundColors = [];

@@ -22,11 +22,7 @@ class VotesController extends Controller
         }
         $this->validate($request, $rules);
         if ($new_choice = $request->get('new-choice')) {
-            $choiceModel = new Choice;
-            $choiceModel->name = $new_choice;
-            $choiceModel->poll_id = $request->get('poll_id');
-            $choiceModel->saveOrFail();
-            $choice_id = $choiceModel->id;
+            $choice_id = $this->addChoice($new_choice);
         } else {
             $choice_id = $request->get('choice');
         }
@@ -37,5 +33,13 @@ class VotesController extends Controller
         $request->session()->flash('status', 'Your vote was saved.');
         $request->session()->flash('data', $vote->choice_id);
         return redirect("polls/show/$vote->poll_id");
+    }
+
+    protected function addChoice($new_choice) {
+        $choiceModel = new Choice;
+        $choiceModel->name = $new_choice;
+        $choiceModel->poll_id = request()->get('poll_id');
+        $choiceModel->saveOrFail();
+        return $choiceModel->id;
     }
 }
